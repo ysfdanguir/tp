@@ -33,18 +33,29 @@ public class MoteurInference {
 			found = false;
 		for ( int i=0; i<BR.size(); i++) {
 			r = BR.get(i);
-			if(BF.contains(r.getPremisse())==true )
+			boolean flag = false;
+			for(int j=0;j<r.getPremisse().length; j++) {
+				String premisse = r.getPremisse()[j];
+				
+				if(BF.contains(premisse)==false) {
+				flag = true;
+				break;
+				}
+			}
+			if(flag==false) {
 				found=true;
 				BF.add(r.getConclusion());
 			    BR.remove(i);
+			 }
 		}
-		}
+			
+
+	}
 		if (BF.contains(Propverif)==true)
 			return true;
 		else {
 			return false;
-		}	
-
-	}
+		}
 	
+}
 }

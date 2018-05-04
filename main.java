@@ -18,9 +18,23 @@ public class main {
 		
 		BF.add("P");
 		
-		
+		//COMPOSEE
 		System.out.print( MoteurInference.chainageavant(BR, BF, "F"));
 		
+		RegleSimple r3 = new RegleSimple("P&J","Q");
+		RegleSimple r4 = new RegleSimple("Q&K","R");
+		
+		
+		ArrayList <String> BF1 = new ArrayList<String>();
+		ArrayList<RegleSimple> BR1 = new ArrayList<RegleSimple>();
+		
+		BR.add(r3);
+		BR.add(r4);
+		
+		BF.add("P");
+		
+		
+		System.out.print( MoteurInference.chainageavant(BR1, BF1, "P"));
 	}
 
 }
