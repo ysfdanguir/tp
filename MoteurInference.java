@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MoteurInference {
 	
@@ -46,16 +47,69 @@ public class MoteurInference {
 				found=true;
 				BF.add(r.getConclusion());
 			    BR.remove(i);
-			 }
-		}
+			 	}
+			}
 			
 
-	}
+		}
 		if (BF.contains(Propverif)==true)
 			return true;
 		else {
 			return false;
 		}
 	
+	}
+	public static boolean verifier() {
+	Scanner scan = new Scanner(System.in);
+	System.out.println("We are having a problem finding it, are you sure about this? y/n ");
+	String answer = scan.nextLine();
+	boolean answer1 = true;
+	if(answer.equals("y")) {
+		answer1 = true;
+	}else if(answer.equals("n")){
+		answer1 = false;
+	}else {
+		System.out.println("answer with: 'y' or  'n' ");
+	}
+	return answer1;
+	}
+	public static boolean chainagearriere(ArrayList<RegleSimple> BR,ArrayList<String> BF, String Propverif) {
+		boolean fin=false;
+				if (BF.contains(Propverif)==true) {
+					fin = true;
+				}else {
+					RegleSimple r=new RegleSimple();
+					String Propverif1 = Propverif;
+					if(BF.contains(Propverif1)== false  ) {
+						for ( int i=0; i<BR.size(); i++) {
+							r = BR.get(i);
+							if(BF.contains(r.getConclusion())==true ) {
+								Propverif1=r.getPremisse();
+							    BR.remove(i);
+							    MoteurInference.chainagearriere(BR, BF,Propverif1);
+							    
+							}
+							break;
+						}
+					
+					if (BF.contains(Propverif)==true)
+						fin= true;
+					else {
+						Scanner scan = new Scanner(System.in);
+						System.out.println("We are having a problem finding it, are you sure about this? y/n ");
+						String answer = scan.nextLine();
+						
+						if(answer.equals("y")) {
+							fin = true;
+						}else if(answer.equals("n")){
+							fin = false;
+						}else {
+							System.out.println("answer with: 'y' or  'n' ");
+						}
+					}
+				}
+				}
+				return fin;	
+	}
 }
-}
+
