@@ -80,21 +80,21 @@ public class MoteurInference {
 				}else {
 					RegleSimple r=new RegleSimple();
 					String Propverif1 = Propverif;
-					if(BF.contains(Propverif1)== false  ) {
+					boolean flag = true;
+					
 						for ( int i=0; i<BR.size(); i++) {
 							r = BR.get(i);
-							if(BF.contains(r.getConclusion())==true ) {
+							if(Propverif1.equals(r.getConclusion())==true ) {
+								flag = false;
 								Propverif1=r.getPremisse();
-							    BR.remove(i);
-							    MoteurInference.chainagearriere(BR, BF,Propverif1);
 							    
+							    MoteurInference.chainagearriere(BR, BF,Propverif1);
+							    break;
 							}
-							break;
+							
 						}
 					
-					if (BF.contains(Propverif)==true)
-						fin= true;
-					else {
+					if (flag==true){
 						Scanner scan = new Scanner(System.in);
 						System.out.println("We are having a problem finding it, are you sure about this? y/n ");
 						String answer = scan.nextLine();
@@ -107,7 +107,7 @@ public class MoteurInference {
 							System.out.println("answer with: 'y' or  'n' ");
 						}
 					}
-				}
+				
 				}
 				return fin;	
 	}
